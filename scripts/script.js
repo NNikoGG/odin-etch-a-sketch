@@ -1,7 +1,7 @@
 // creating a 16x16 div grid
 
 const squareDivsContainer = document.querySelector('div.container');
-const sizeButton = document.querySelector('div.size-button button');
+const sizeButton = document.getElementById('sizeButton');
 const blackButton = document.getElementById('blackButton');
 const rainbowButton = document.getElementById('rainbowButton');
 const clearButton = document.getElementById('clearButton');
