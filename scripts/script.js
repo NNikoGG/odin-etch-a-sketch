@@ -1,15 +1,42 @@
 // creating a 16x16 div grid
-// Todo: Dunno if there's a better option this is all I could come up at the moment
+
 const squareDivsContainer = document.querySelector('div.container');
-for (let i = 0; i < 16; i++){
-    const newDiv = document.createElement('div');
-    newDiv.className = "new-div";
-    squareDivsContainer.appendChild(newDiv);
-    for (let i = 0; i < 16; i++){
+const sizeButton = document.querySelector('div.size-button button');
+sizeButton.addEventListener('click', sizeButtonClicked);
+
+function sizeButtonClicked(){
+    let size = '';
+    size = prompt("Enter the size of the square grid (For eg: 16, 32 etc");
+    size = parseInt(size);
+    if (isNaN(size)){
+        console.log("Error! Please enter a valid numerical size");
+        sizeButtonClicked();
+    }
+    else if (size > 100){
+        console.log("Error! Please enter a valid size below 100");
+        sizeButtonClicked();
+    }
+    else {
+        createGrid(size);
+    }     
+}
+
+function createGrid(size) {
+    squareDivsContainer.innerHTML = '';
+    const squareSize = squareDivsContainer.clientWidth / size;
+
+    for (let i = 0; i < size * size; i++) {
         const squareDiv = document.createElement('div');
         squareDiv.className = "square-div";
-        newDiv.appendChild(squareDiv);
-        // squareDiv.textContent = 'O';
-        squareDiv.setAttribute('style', 'background-color: blue; border: solid 1px black');
+        squareDiv.style.flexBasis = `${squareSize}px`;
+        squareDiv.style.height = `${squareSize}px`; // Set height to maintain aspect ratio
+
+        squareDiv.onmouseover = function() {
+            squareDiv.style.backgroundColor = 'black';
+        }
+
+        squareDivsContainer.appendChild(squareDiv);
     }
 }
+
+createGrid(16);
